@@ -1,0 +1,14 @@
+import java.util.List;
+
+public abstract class Personaje {
+
+	protected String nombre;
+	protected int nivelDeMagia;
+	protected int nivelDeMagiaActual;
+	protected int puntosDeVida;
+	protected int puntosDeVidaActual;
+	protected List<Hechizo> hechizos;
+	protected boolean proteccionContraHechizosBasicos;
+	protected boolean proteccionContraDanioFisico;
+	protected boolean tieneVarita;
+}
