@@ -258,10 +258,10 @@ Inferius --|> Hechizo
 SectumSempra --|> Hechizo
 
 %% Descripción del método de creación en las fábricas
-note right of HechizosDefensivosFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Protego();\n MEDIO -> ProtegoDuo();\n AVANZADA -> ProtegoHorbilis();\n MUY_AVANZADA -> Abalio(); }
-note right of HechizosAtaqueFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Expelliarmus();\n MEDIO -> Desmaius();\n AVANZADA -> Incendio();\n MUY_AVANZADA -> Expulso(); }
-note right of AtaqueOscuroFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Confringo();\n MEDIO -> Crucio();\n AVANZADA -> Imperius();\n MUY_AVANZADA -> AvadaKedavra(); }
-note right of HabilidadesEspecialFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> ProtegoDiabolica();\n MEDIO -> Embrujo();\n AVANZADA -> Inferius();\n MUY_AVANZADA -> SectumSempra(); }
+%%note right of HechizosDefensivosFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Protego();\n MEDIO -> ProtegoDuo();\n AVANZADA -> ProtegoHorbilis();\n MUY_AVANZADA -> Abalio(); }
+%%note right of HechizosAtaqueFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Expelliarmus();\n MEDIO -> Desmaius();\n AVANZADA -> Incendio();\n MUY_AVANZADA -> Expulso(); }
+%%note right of AtaqueOscuroFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Confringo();\n MEDIO -> Crucio();\n AVANZADA -> Imperius();\n MUY_AVANZADA -> AvadaKedavra(); }
+%%note right of HabilidadesEspecialFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> ProtegoDiabolica();\n MEDIO -> Embrujo();\n AVANZADA -> Inferius();\n MUY_AVANZADA -> SectumSempra(); }
 
 
 Hechizo --> Personaje
