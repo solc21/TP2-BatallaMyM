@@ -22,38 +22,71 @@ class Combatiente {
     +getNivelDePoder() int
 }
 
+class BatallonMiembrosObserver {
+    <<interface>>
+    +onMiembroPerdido(batallon: Batallon, miembro: Combatiente)
+    +onMiembroDebilitado(batallon: Batallon, miembro: Combatiente)
+}
+
+class BatallonEstadoObserver {
+    <<interface>>
+    +onBatallonDerrotado(batallon: Batallon)
+    +onBatallonDebilitado(batallon: Batallon, porcentaje: int)
+}
+
+%% Clases principales
 class Personaje {
     <<abstract>>
     #nombre: String
-    #nivelDeSalud: int
+    #puntosDeVida: int
     #varita: Varita
-    #escudoMagico: EscudoMagico
-    #capacidadMagica: CapacidadMagica
-    +atacar(objetivo: Combatiente)
+    #sistemaDefensivo: SistemaDefensivo
+    #capacidadHechicero: CapacidadHechicero
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
+    +recibirDanio(cantidad: int)
     +estaActivo() boolean
+    -puedeRealizarHechizo(hechizo: Hechizo) boolean
 }
-    
+
 class Batallon {
     -miembros: List~Combatiente~
-    +atacar(objetivo: Combatiente)
+    -observadoresMiembros: List~BatallonMiembrosObserver~
+    -observadoresEstado: List~BatallonEstadoObserver~
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
+    +recibirDanio(cantidad: int)
     +estaActivo() boolean
     +agregarMiembro(miembro: Combatiente)
+    +agregarObservadorMiembros(observador: BatallonMiembrosObserver)
+    +agregarObservadorEstado(observador: BatallonEstadoObserver)
+}
+
+%% Observadores concretos
+class BatallonMiembrosLogger {
+    +onMiembroPerdido(batallon: Batallon, miembro: Combatiente)
+    +onMiembroDebilitado(batallon: Batallon, miembro: Combatiente)
+}
+
+class BatallonEstadoLogger {
+    +onBatallonDerrotado(batallon: Batallon)
+    +onBatallonDebilitado(batallon: Batallon, porcentaje: int)
 }
 
 Combatiente <|.. Personaje
 Combatiente <|.. Batallon
 
-class EscudoMagico {
-    -proteccionContraHechizosBasicos: boolean
-    -proteccionContraDanioFisico: boolean
-    +tieneProteccion(tipo: TipoDeDanio) boolean
-}
-
-class CapacidadMagica {
+class CapacidadHechicero {
     -nivelDeMagia: int
     -nivelDeMagiaActual: int
-    -hechizos: List~Hechizo~
-    +agregarHechizo(hechizo: Hechizo)
+    -hechizos: Set~Hechizo~
+    +tieneHechizo(hechizo: Hechizo) boolean
+    +tieneSuficienteMagia(coste: int) boolean
+    +consumirMagia(cantidad: int)
+}
+
+class SistemaDefensivo {
+    -proteccionContraHechizosBasicos: boolean
+    -proteccionContraDanioFisico: boolean
+    +calcularDanioReducido(danioOriginal: int) int
 }
 
 class Varita {
@@ -106,9 +139,14 @@ Mortifago <|-- Comandante
 
 %% Clase Batallon
 Batallon o-- "0..*" Combatiente
+Batallon o-- "0..*" BatallonMiembrosObserver
+Batallon o-- "0..*" BatallonEstadoObserver
+BatallonMiembrosObserver <|.. BatallonMiembrosLogger
+BatallonEstadoObserver <|.. BatallonEstadoLogger
 Personaje *-- Varita
-Personaje *-- EscudoMagico
-Personaje *-- CapacidadMagica
+Personaje *-- SistemaDefensivo
+Personaje *-- CapacidadHechicero
+CapacidadHechicero o-- "0..*" Hechizo
 
 %% Nota
 %%note right of Batallon : En el método atacar, usará Prolog para decidir qué personaje del batallón lanzará un hechizo, el hechizo en cuestión y a quién aplicará.
