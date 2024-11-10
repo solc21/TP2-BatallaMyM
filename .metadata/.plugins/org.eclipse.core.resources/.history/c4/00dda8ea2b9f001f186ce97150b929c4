@@ -1,0 +1,7 @@
+
+public interface Combatiente {
+    void atacar(Combatiente objetivo);
+    void recibirDanio(int cantidad);
+    boolean estaActivo();
+    int getNivelDePoder();
+}

@@ -1,5 +1,5 @@
 
 public interface Hechizo {
-	public String ejecutar(Personaje personaje);
+	public void ejecutar(Personaje personaje);
 
 }

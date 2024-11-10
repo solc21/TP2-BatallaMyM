@@ -1,0 +1,12 @@
+
+public class PersonajeFactory {
+    public abstract Personaje crearPersonaje(TipoPersonaje tipo);
+
+    public Personaje crearMago() {
+        return new Mago();
+    }
+
+    public Personaje crearMortifago() {
+        return new Mortifago();
+    }
+}

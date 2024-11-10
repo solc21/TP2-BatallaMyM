@@ -1,0 +1,4 @@
+
+public enum TipoPersonaje {
+	AUROR, PROFESOR, ESTUDIANTE, SEGUIDOR, COMANDANTE
+}

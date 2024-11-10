@@ -1,26 +1,35 @@
-import java.util.List;
+public abstract class Personaje implements Combatiente {
+    protected String nombre;
+    protected int puntosDeVida;
+    protected Varita varita;
+    protected SistemaDefensivo sistemaDefensivo;
+    protected CapacidadHechicero capacidadHechicero;
 
-public abstract class Personaje {
+    public Personaje(String nombre, int puntosDeVida, Varita varita, 
+                     SistemaDefensivo sistemaDefensivo, CapacidadHechicero capacidadHechicero) {
+        this.nombre = nombre;
+        this.puntosDeVida = puntosDeVida;
+        this.varita = varita;
+        this.sistemaDefensivo = sistemaDefensivo;
+        this.capacidadHechicero = capacidadHechicero;
+    }
 
-	protected String nombre;
-	protected int nivelDeMagia;
-	protected int nivelDeMagiaActual;
-	protected int puntosDeVida;
-	protected int puntosDeVidaActual;
-	protected List<Hechizo> hechizos;
-	protected boolean proteccionContraHechizosBasicos;
-	protected boolean proteccionContraDanioFisico;
-	protected boolean tieneVarita;
-	
-	
-	public void lanzarHechizo(Hechizo hechizo, Personaje personaje) {}
-	public void setProteccionContraHechizosBasicos(boolean valor) {}
-	public void setProteccionContraDanioFisico(boolean valor) {}
-	public void setTieneVarita(boolean valor) {}
-	public void setHechizos(List<Hechizo> hechizos) {}
-	public boolean getProteccionContraHechizosBasicos() {}
-	public boolean getProteccionContraDanioFisico() {}
-	public boolean getTieneVarita() {}
-	public List<Hechizo> getHechizos(){}
-	public void agregarHechizo(Hechizo hechizo) {}
+    public void atacar(Hechizo hechizo, Combatiente objetivo) {
+        if (puedeRealizarHechizo(hechizo)) {
+            hechizo.ejecutar(this);
+        }
+    }
+
+    public void recibirDanio(int cantidad) {
+        int danioReducido = sistemaDefensivo.calcularDanioReducido(cantidad);
+        puntosDeVida -= danioReducido;
+    }
+
+    public boolean estaActivo() {
+        return puntosDeVida > 0;
+    }
+
+    protected boolean puedeRealizarHechizo(Hechizo hechizo) {
+        return varita.puedeUsarse() && capacidadHechicero.tieneHechizo(hechizo);
+    }
 }

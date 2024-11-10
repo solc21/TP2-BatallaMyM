@@ -1,0 +1,8 @@
+
+public interface Combatiente {
+    void atacar(Combatiente objetivo);
+    void atacar(Hechizo hechizo, Combatiente objetivo);
+    void recibirDanio(int cantidad);
+    boolean estaActivo();
+    int getNivelDePoder();
+}

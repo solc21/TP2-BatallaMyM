@@ -1,0 +1,9 @@
+
+public class Auror extends Mago {
+    @Override
+    public void lanzarHechizo(Personaje personaje) {
+        System.out.println("Auror lanza un hechizo protector");
+        Hechizo hechizo = new Expelliarmus(); // Puede personalizarse según la implementación
+        hechizo.ejecutar(personaje);
+    }
+}

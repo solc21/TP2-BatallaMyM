@@ -1,0 +1,5 @@
+
+public interface BatallonEstadoObserver {
+	void onBatallonDerrotado(Batallon batallon);
+	void onBatallonDebilitado(Batallon batallon, int porcentaje);
+}

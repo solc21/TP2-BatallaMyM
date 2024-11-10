@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Batallon implements Combatiente {
+    private List<Combatiente> miembros = new ArrayList<>();
+    private List<BatallonMiembrosObserver> observadoresMiembros = new ArrayList<>();
+    private List<BatallonEstadoObserver> observadoresEstado = new ArrayList<>();
+	private CapacidadHechicero capacidadHechicero;
+
+    //@override
+    public void atacar(Hechizo hechizo, Combatiente objetivo) {
+        for (Combatiente miembro : miembros) {
+            if (miembro.estaActivo()) {
+                miembro.atacar(hechizo, objetivo);
+            }
+        }
+    }
+
+    public void recibirDanio(int cantidad) {
+        for (Combatiente miembro : this.miembros) {
+            miembro.recibirDanio(cantidad / miembros.size());
+        }
+    }
+
+    public boolean estaActivo() {
+        return miembros.stream().anyMatch(Combatiente::estaActivo);
+    }
+
+    public void agregarMiembro(Combatiente miembro) {
+        miembros.add(miembro);
+    }
+
+    public void agregarObservadorMiembros(BatallonMiembrosObserver observador) {
+        observadoresMiembros.add(observador);
+    }
+
+    public void agregarObservadorEstado(BatallonEstadoObserver observador) {
+        observadoresEstado.add(observador);
+    }
+    
+    public int getNivelDePoder() {
+        return capacidadHechicero.tieneSuficienteMagia(1) ? 10 : 0;
+    }
+}

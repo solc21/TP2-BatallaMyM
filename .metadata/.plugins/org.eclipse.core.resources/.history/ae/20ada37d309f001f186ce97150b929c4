@@ -1,0 +1,15 @@
+
+public class Auror extends Mago {
+    public Auror(String nombre, int puntosDeVida, Varita varita, SistemaDefensivo sistemaDefensivo,
+			CapacidadHechicero capacidadHechicero) {
+		super(nombre, puntosDeVida, varita, sistemaDefensivo, capacidadHechicero);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+    public void lanzarHechizo(Personaje personaje) {
+        System.out.println("Auror lanza un hechizo protector");
+        Hechizo hechizo = new Expelliarmus(); // Puede personalizarse según la implementación
+        hechizo.ejecutar(personaje);
+    }
+}

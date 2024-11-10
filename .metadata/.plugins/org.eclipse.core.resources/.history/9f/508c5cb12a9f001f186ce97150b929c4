@@ -1,0 +1,29 @@
+public abstract class Personaje implements Combatiente {
+    protected String nombre;
+    protected int puntosDeVida;
+    protected Varita varita;
+    protected SistemaDefensivo sistemaDefensivo;
+    protected CapacidadHechicero capacidadHechicero;
+
+    public Personaje(String nombre, int puntosDeVida, Varita varita, 
+                     SistemaDefensivo sistemaDefensivo, CapacidadHechicero capacidadHechicero) {
+        this.nombre = nombre;
+        this.puntosDeVida = puntosDeVida;
+        this.varita = varita;
+        this.sistemaDefensivo = sistemaDefensivo;
+        this.capacidadHechicero = capacidadHechicero;
+    }
+
+    @Override
+    public void recibirDanio(int cantidad) {
+        int danioReducido = sistemaDefensivo.calcularDanioReducido(cantidad);
+        puntosDeVida -= danioReducido;
+        if (puntosDeVida < 0) puntosDeVida = 0;
+        System.out.println(nombre + " recibió " + danioReducido + " de daño.");
+    }
+
+    @Override
+    public boolean estaActivo() {
+        return puntosDeVida > 0;
+    }
+}
