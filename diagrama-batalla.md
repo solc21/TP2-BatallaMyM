@@ -21,13 +21,6 @@ classDiagram
         +estaActivo() boolean
     }
     
-    class Batallon {
-        -miembros: List~Combatiente~
-        +atacar(objetivo: Combatiente)
-        +estaActivo() boolean
-        +agregarMiembro(miembro: Combatiente)
-    }
-    
     class EscudoMagico {
         -proteccionContraHechizosBasicos: boolean
         -proteccionContraDanioFisico: boolean
@@ -44,6 +37,13 @@ classDiagram
     class Varita {
         -funcional: boolean
         +puedeUsarse() boolean
+    }
+    
+    class Batallon {
+        -miembros: List~Combatiente~
+        +atacar(objetivo: Combatiente)
+        +estaActivo() boolean
+        +agregarMiembro(miembro: Combatiente)
     }
     
     Combatiente <|.. Personaje
