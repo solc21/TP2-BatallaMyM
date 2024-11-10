@@ -91,7 +91,7 @@ class Batallon {
 Personaje --> Batallon
 
 %% Nota
-note right of Batallon : En el método atacar, usará Prolog para decidir qué personaje del batallón lanzará un hechizo, el hechizo en cuestión y a quién aplicará.
+%%note right of Batallon : En el método atacar, usará Prolog para decidir qué personaje del batallón lanzará un hechizo, el hechizo en cuestión y a quién aplicará.
 
 %% Clase PersonajeFactory y sus subclases
 class PersonajeFactory {
