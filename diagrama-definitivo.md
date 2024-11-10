@@ -98,40 +98,40 @@ class Varita {
 class Mago {
     # PUNTOS_DE_VIDA_INICIAL = 5
     # NIVEL_DE_MAGIA_INICIAL = 10
-    + lanzarHechizo(personaje: Personaje): void
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
 }
 
 class Auror {
-    + lanzarHechizo(personaje: Personaje): void
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
 }
 
 class Profesor {
-    + lanzarHechizo(personaje: Personaje): void
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
 }
 
 class Estudiante {
-    + lanzarHechizo(personaje: Personaje): void
-}
-
-%% Clase Mortifago y subclases
-class Mortifago {
-    # PUNTOS_DE_VIDA_INICIAL = 10
-    # NIVEL_DE_MAGIA_INICIAL = 10
-    + lanzarHechizo(personaje: Personaje): void
-}
-
-class Seguidor {
-    + lanzarHechizo(personaje: Personaje): void
-}
-
-class Comandante {
-    + lanzarHechizo(personaje: Personaje): void
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
 }
 
 Personaje <|-- Mago
 Mago <|-- Auror
 Mago <|-- Profesor
 Mago <|-- Estudiante
+
+%% Clase Mortifago y subclases
+class Mortifago {
+    # PUNTOS_DE_VIDA_INICIAL = 10
+    # NIVEL_DE_MAGIA_INICIAL = 10
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
+}
+
+class Seguidor {
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
+}
+
+class Comandante {
+    +atacar(hechizo: Hechizo, objetivo: Combatiente)
+}
 
 Personaje <|-- Mortifago
 Mortifago <|-- Seguidor
@@ -323,6 +323,4 @@ SectumSempra --|> Hechizo
 %%note right of AtaqueOscuroFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> Confringo();\n MEDIO -> Crucio();\n AVANZADA -> Imperius();\n MUY_AVANZADA -> AvadaKedavra(); }
 %%note right of HabilidadesEspecialFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> ProtegoDiabolica();\n MEDIO -> Embrujo();\n AVANZADA -> Inferius();\n MUY_AVANZADA -> SectumSempra(); }
 
-
-Personaje o-- "0..*" Hechizo
 ```
