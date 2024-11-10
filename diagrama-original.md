@@ -77,8 +77,8 @@ Mago <|-- Profesor
 Mago <|-- Estudiante
 
 Personaje <|-- Mortifago
-Mago <|-- Seguidor
-Mago <|-- Comandante
+Mortifago <|-- Seguidor
+Mortifago <|-- Comandante
 
 %% Clase Batallon
 class Batallon {
@@ -108,6 +108,7 @@ class MortifagoFactory {
     + crearPersonaje(tipo: TipoPersonaje): Personaje
 }
 
+PersonajeFactory --> Personaje
 PersonajeFactory <|-- MagoFactory
 PersonajeFactory <|-- MortifagoFactory
 
@@ -116,8 +117,8 @@ class Main {
     + main(String args[]): void
 }
 
-Main --> PersonajeFactory
-Main --> Personaje
+Batallon --> PersonajeFactory
+Batallon o-- "0..*" Personaje
 
 %% Enumeración Nivel y TipoDeMagia
 class Nivel {
@@ -163,6 +164,10 @@ class AtaqueOscuroFactory {
 class HabilidadesEspecialFactory {
     + crearHechizo(nivel: Nivel): Hechizo
 }
+
+
+
+HechizoFactory --> Hechizo
 
 HechizoFactory <|-- HechizosDefensivosFactory
 HechizoFactory <|-- HechizosAtaqueFactory
@@ -264,5 +269,5 @@ SectumSempra --|> Hechizo
 %%note right of HabilidadesEspecialFactory : switch(nivelDeDificultad) { \n PRINCIPIANTE -> ProtegoDiabolica();\n MEDIO -> Embrujo();\n AVANZADA -> Inferius();\n MUY_AVANZADA -> SectumSempra(); }
 
 
-Hechizo --> Personaje
+Personaje o-- "0..*" Hechizo
 ```
