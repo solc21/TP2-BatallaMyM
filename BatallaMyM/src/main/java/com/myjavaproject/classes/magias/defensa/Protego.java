@@ -5,7 +5,7 @@ import com.myjavaproject.interfaces.Combatiente;
 public class Protego extends HechizoDefensa {
 
     public Protego() {
-        super(6, 60);
+        super(6, 30);
     }
 
     // Descripción: Un hechizo que crea un escudo mágico para desviar hechizos.

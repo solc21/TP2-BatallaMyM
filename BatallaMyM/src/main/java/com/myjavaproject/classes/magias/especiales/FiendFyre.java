@@ -4,7 +4,7 @@ import com.myjavaproject.interfaces.Combatiente;
 
 public class FiendFyre extends HechizoEspecial {
     private static final int COSTE = 10;
-    private static final int PROTECCION = 100; // Protección máxima, pero muy peligrosa
+    private static final int PROTECCION = 50; // Protección máxima, pero muy peligrosa
 
     public FiendFyre() {
         super(COSTE, PROTECCION);

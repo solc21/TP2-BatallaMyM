@@ -4,7 +4,7 @@ import com.myjavaproject.interfaces.Combatiente;
 
 public class MurusIgnis extends HechizoEspecial {
     private static final int COSTE = 7;
-    private static final int PROTECCION = 70; // Protege significativamente
+    private static final int PROTECCION = 30; // Protege significativamente
 
     public MurusIgnis() {
         super(COSTE, PROTECCION);

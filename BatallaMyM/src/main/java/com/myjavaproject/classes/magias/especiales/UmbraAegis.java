@@ -4,7 +4,7 @@ import com.myjavaproject.interfaces.Combatiente;
 
 public class UmbraAegis extends HechizoEspecial {
     private static final int COSTE = 6;
-    private static final int PROTECCION = 60; // Protege moderadamente
+    private static final int PROTECCION = 20; // Protege moderadamente
 
     public UmbraAegis() {
         super(COSTE, PROTECCION);

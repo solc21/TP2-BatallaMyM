@@ -5,7 +5,7 @@ import com.myjavaproject.interfaces.Combatiente;
 public class VulnerasSanentur extends HechizoDefensa {
 
     public VulnerasSanentur() {
-        super(8, 80);
+        super(8, 50);
     }
 
     // Descripción: Un hechizo curativo que sana heridas graves.

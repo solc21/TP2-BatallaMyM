@@ -7,7 +7,7 @@ public class Abalio extends HechizoDefensa { // Protege moderadamente
     // Descripción: Un hechizo defensivo que crea una barrera mágica para proteger al lanzador.
 
     public Abalio() {
-        super(3, 30);
+        super(3, 20);
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.myjavaproject.interfaces.Combatiente;
 public class CrassoArmorum extends HechizoDefensa {
 
     public CrassoArmorum() {
-        super(6, 60);
+        super(6, 30);
     }
 
     // Descripción: Un hechizo que refuerza la armadura del lanzador.

@@ -19,4 +19,12 @@ public class SistemaDefensivo {
         this.cantidadProteccion -= cantidadDeDanio;
         this.cantidadProteccion = Math.max(this.cantidadProteccion, 0);
     }
+
+    public void quitarProteccion() {
+        this.cantidadProteccion = 0;
+    }
+
+    public int nivelDeProteccion() {
+        return cantidadProteccion;
+    }
 }

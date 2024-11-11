@@ -4,7 +4,7 @@ import com.myjavaproject.interfaces.Combatiente;
 
 public class ProtegoDiabolica extends HechizoEspecial {
     private static final int COSTE = 8;
-    private static final int DANIO = 80; // Daño significativo
+    private static final int DANIO = 40; // Daño significativo
 
     public ProtegoDiabolica() {
         super(COSTE, DANIO);
