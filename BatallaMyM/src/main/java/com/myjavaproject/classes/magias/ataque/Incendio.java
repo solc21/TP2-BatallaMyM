@@ -1,14 +1,19 @@
 package com.myjavaproject.classes.magias.ataque;
 
 import com.myjavaproject.interfaces.Combatiente;
-import com.myjavaproject.interfaces.Hechizo;
 
-public class Incendio implements Hechizo {
-    public static final int COSTE = 7;
+public class Incendio extends HechizoAtaque {
+    private static final int DANIO = 70;
+    private static final int COSTE = 7;
+
+    public Incendio() {
+        super(COSTE, DANIO);
+    }
     
     @Override
-    public void ejecutar(Combatiente personaje) {
+    public void ejecutar(Combatiente objetivo) {
         // Implement the logic for the Incendio spell
-        System.out.println("Incendio executed");
+        System.out.println("Incendio executed, causing " + DANIO + " damage");
+        objetivo.recibirDanio(DANIO);
     }
 }

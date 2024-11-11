@@ -1,14 +1,17 @@
 package com.myjavaproject.classes.magias.defensa;
 
 import com.myjavaproject.interfaces.Combatiente;
-import com.myjavaproject.interfaces.Hechizo;
 
-public class Protego implements Hechizo {
-    public static final int COSTE = 5;
-    
+public class Protego extends HechizoDefensa {
+
+    public Protego() {
+        super(6, 60);
+    }
+
+    // Descripción: Un hechizo que crea un escudo mágico para desviar hechizos.
     @Override
     public void ejecutar(Combatiente personaje) {
         // Implement the logic for the Protego spell
-        System.out.println("Protego executed by");
+        System.out.println("Protego executed");
     }
 }

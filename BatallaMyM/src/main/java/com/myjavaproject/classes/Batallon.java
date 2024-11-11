@@ -3,7 +3,7 @@ package com.myjavaproject.classes;
 import com.myjavaproject.interfaces.Combatiente;
 import com.myjavaproject.interfaces.BatallonMiembrosObserver;
 import com.myjavaproject.interfaces.BatallonEstadoObserver;
-import com.myjavaproject.interfaces.Hechizo;
+import com.myjavaproject.observadores.PersonajeEstadoNotifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,41 +20,55 @@ public class Batallon implements Combatiente {
     }
 
     @Override
-    public void atacar(Hechizo hechizo, Combatiente objetivo) {
-        // Implementar la lógica de ataque
+    public void atacar(Combatiente objetivo) {
         for (Combatiente miembro : miembros) {
-            miembro.atacar(hechizo, objetivo);
+            if (!miembro.estaDerrotado())
+                miembro.atacar(objetivo);
         }
     }
 
+    @Override
     public void recibirDanio(int cantidad) {
-        // Implementar la lógica para recibir daño
+        Combatiente primerMiembroVivo = miembros.stream().filter(miembro -> !miembro.estaDerrotado()).findFirst().orElse(null);
+        if (primerMiembroVivo != null) {
+            primerMiembroVivo.recibirDanio(cantidad);
+        }
+    }
+
+    public void moverAlPrincipio(Combatiente miembro) {
+        if (miembros.remove(miembro)) {
+            miembros.add(0, miembro);
+        }
     }
 
     public boolean estaActivo() {
-        // Implementar la lógica para verificar si el batallón está activo
         return !miembros.isEmpty();
     }
-    
+
+    @Override
     public boolean estaDerrotado() {
-    	for (Combatiente miembro : miembros) {
-    		if(!miembro.estaDerrotado()) 
-    			return true;
-    	}
-    	return false;
-    }
-    
-    public boolean tienePersonajesSaludables() {
-    	for (Combatiente miembro : miembros) {
-    		if(!miembro.estaDerrotado()) 
-    			return true;
-    	}
-    	return false;
+        for (Combatiente miembro : miembros) {
+            if (!miembro.estaDerrotado())
+                return false;
+        }
+        return true;
     }
 
-    public void agregarMiembro(Combatiente miembro) {
+    public boolean tienePersonajesSaludables() {
+        for (Combatiente miembro : miembros) {
+            if (!miembro.estaDerrotado())
+                return true;
+        }
+        return false;
+    }
+
+    public void agregarPersonaje(Combatiente miembro) {
         miembros.add(miembro);
-        // Notificar a los observadores de miembros
+        if (miembro instanceof Personaje) {
+            PersonajeEstadoNotifier notifier = new PersonajeEstadoNotifier(this);
+            ((Personaje) miembro).agregarObservadorEstado(notifier);
+        }
+        notificarObservadoresMiembros();
     }
 
     public void agregarObservadorMiembros(BatallonMiembrosObserver observador) {
@@ -63,5 +77,56 @@ public class Batallon implements Combatiente {
 
     public void agregarObservadorEstado(BatallonEstadoObserver observador) {
         observadoresEstado.add(observador);
+    }
+
+    public List<Combatiente> getMiembros() {
+        List<Combatiente> miembrosVivos = new ArrayList<>();
+        for (Combatiente miembro : miembros) {
+            if (!miembro.estaDerrotado()) {
+                miembrosVivos.addAll(miembro.getMiembros());
+            }
+        }
+        return miembrosVivos;
+    }
+
+    @Override
+    public void recibirProteccion(int cantidad) {
+        for (Combatiente miembro : miembros) {
+            if (!miembro.estaDerrotado())
+                miembro.recibirProteccion(cantidad);
+        }
+    }
+
+    public void onPersonajeMuerto(Personaje personaje) {
+        notificarMiembroPerdido(personaje);
+        if (estaDerrotado()) {
+            notificarBatallonDerrotado();
+        } else {
+            notificarBatallonDebilitado();
+        }
+    }
+
+    private void notificarMiembroPerdido(Combatiente miembro) {
+        for (BatallonMiembrosObserver observer : observadoresMiembros) {
+            observer.onMiembroPerdido(this, miembro);
+        }
+    }
+
+    private void notificarBatallonDerrotado() {
+        for (BatallonEstadoObserver observer : observadoresEstado) {
+            observer.onBatallonDerrotado(this);
+        }
+    }
+
+    private void notificarBatallonDebilitado() {
+        for (BatallonEstadoObserver observer : observadoresEstado) {
+            observer.onBatallonDebilitado(this);
+        }
+    }
+
+    private void notificarObservadoresMiembros() {
+        for (BatallonMiembrosObserver observer : observadoresMiembros) {
+            observer.onMiembroDebilitado(this, null);
+        }
     }
 }

@@ -1,10 +1,14 @@
 package com.myjavaproject.classes.magias.defensa;
 
 import com.myjavaproject.interfaces.Combatiente;
-import com.myjavaproject.interfaces.Hechizo;
 
-public class VulnerasSanentur implements Hechizo {
-    public static final int COSTE = 8;
+public class VulnerasSanentur extends HechizoDefensa {
+
+    public VulnerasSanentur() {
+        super(8, 80);
+    }
+
+    // Descripción: Un hechizo curativo que sana heridas graves.
     
     @Override
     public void ejecutar(Combatiente personaje) {

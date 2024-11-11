@@ -1,8 +1,21 @@
 package com.myjavaproject;
 
+import com.myjavaproject.classes.Batalla;
+import com.myjavaproject.classes.Batallon;
+import com.myjavaproject.classes.factories.PersonajeFactory;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Bienvenido al Sistema de Batalla Original!");
-        // Aquí se puede iniciar la lógica del juego, crear personajes, batallones, etc.
+        Batallon batallonMagos = new Batallon();
+        Batallon batallonMortifagos = new Batallon();
+
+        for (int i = 0; i < 3; i++) {
+          batallonMagos.agregarPersonaje(PersonajeFactory.crearMago());
+          batallonMortifagos.agregarPersonaje(PersonajeFactory.crearMortifago());
+        }
+
+        // Iniciar la batalla
+        Batalla batalla = new Batalla(batallonMagos, batallonMortifagos);
+        batalla.iniciarBatalla();
     }
 }

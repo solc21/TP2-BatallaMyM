@@ -1,14 +1,15 @@
 package com.myjavaproject.classes.equipamiento;
 
+import com.myjavaproject.enums.TipoDeMagia;
 import com.myjavaproject.interfaces.Hechizo;
 
 import java.util.Set;
 import java.util.HashSet;
 
 public class CapacidadHechicero {
-    private int nivelDeMagia;
-    private int nivelDeMagiaActual;
-    private Set<Hechizo> hechizos;
+	protected int nivelDeMagia;
+    protected int nivelDeMagiaActual;
+    protected Set<Hechizo> hechizos;
 
     public CapacidadHechicero(int nivelDeMagia, int nivelDeMagiaActual) {
         this.nivelDeMagia = nivelDeMagia;
@@ -19,6 +20,24 @@ public class CapacidadHechicero {
     public boolean tieneHechizo(Hechizo hechizo) {
         return hechizos.contains(hechizo);
     }
+    
+    public Hechizo getHechizoAtaque() {
+        for (Hechizo hechizo : hechizos) {
+            if (hechizo.getTipoHechizo().equals(TipoDeMagia.ATAQUE) || hechizo.getTipoHechizo().equals(TipoDeMagia.OSCURA)) {
+                return hechizo;
+            }
+        }
+        return null;
+    }
+
+    public Hechizo getHechizoDefensa() {
+        for (Hechizo hechizo : hechizos) {
+            if (hechizo.getTipoHechizo().equals(TipoDeMagia.DEFENSA) || hechizo.getTipoHechizo().equals(TipoDeMagia.ESPECIAL)) {
+                return hechizo;
+            }
+        }
+        return null;
+    }
 
     public boolean tieneSuficienteMagia(int coste) {
         return nivelDeMagiaActual >= coste;
@@ -26,6 +45,11 @@ public class CapacidadHechicero {
 
     public void consumirMagia(int cantidad) {
         nivelDeMagiaActual -= cantidad;
+        nivelDeMagiaActual = Math.max(nivelDeMagiaActual, 0);
+    }
+
+    public void aumentarMagia(int cantidad) {
+        nivelDeMagiaActual += cantidad;
     }
 
     public int getNivelDeMagia() {

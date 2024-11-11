@@ -1,14 +1,19 @@
 package com.myjavaproject.classes.magias.ataque;
 
-import com.myjavaproject.interfaces.Hechizo;
 import com.myjavaproject.interfaces.Combatiente;
 
-public class Desmaius implements Hechizo {
-    public static final int COSTE = 4;
+public class Desmaius extends HechizoAtaque {
+    private static final int DANIO = 40;
+    private static final int COSTE = 4;
+
+    public Desmaius() {
+        super(COSTE, DANIO);
+    }
 
     @Override
-    public void ejecutar(Combatiente personaje) {
+    public void ejecutar(Combatiente objetivo) {
         // Implement the logic for the Desmaius spell
         System.out.println("Desmaius executed");
+        objetivo.recibirDanio(DANIO);
     }
 }

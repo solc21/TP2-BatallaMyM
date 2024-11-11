@@ -1,14 +1,19 @@
 package com.myjavaproject.classes.magias.ataque;
 
 import com.myjavaproject.interfaces.Combatiente;
-import com.myjavaproject.interfaces.Hechizo;
 
-public class Expelliarmus implements Hechizo {
-    public static final int COSTE = 9;
+public class Expelliarmus extends HechizoAtaque {
+    private static final int DANIO = 90;
+    private static final int COSTE = 9;
+
+    public Expelliarmus() {
+        super(COSTE, DANIO);
+    }
     
     @Override
-    public void ejecutar(Combatiente personaje) {
+    public void ejecutar(Combatiente objetivo) {
         // Implement the logic for the Expelliarmus spell
-        System.out.println("Expelliarmus executed");
+        System.out.println("Expelliarmus executed, causing " + DANIO + " damage.");
+        objetivo.recibirDanio(DANIO);
     }
 }
