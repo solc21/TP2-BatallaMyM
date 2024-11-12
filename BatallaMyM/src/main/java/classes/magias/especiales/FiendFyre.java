@@ -1,0 +1,20 @@
+package classes.magias.especiales;
+
+import interfaces.Combatiente;
+
+public class FiendFyre extends HechizoEspecial {
+    private static final int COSTE = 10;
+    private static final int PROTECCION = 50; // Protección máxima, pero muy peligrosa
+
+    public FiendFyre() {
+        super(COSTE, PROTECCION);
+    }
+
+    // Descripción: Un hechizo que invoca un fuego mágico incontrolable que consume todo a su paso.
+    @Override
+    public void ejecutar(Combatiente personaje) {
+        // Implement the logic for the Fiendfyre spell
+        System.out.println("Fiendfyre executed, providing " + PROTECCION + " protection");
+        personaje.recibirProteccion(this.getProteccion());
+    }
+}
